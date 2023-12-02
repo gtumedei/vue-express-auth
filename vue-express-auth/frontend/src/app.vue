@@ -1,6 +1,6 @@
 <script lang="ts">
 import axios from "axios"
-import { computed, defineComponent } from "vue"
+import { defineComponent } from "vue"
 import UserInfo from "./components/user-info.vue"
 import { User } from "./types"
 
@@ -9,12 +9,6 @@ export default defineComponent({
   data() {
     return {
       user: null as User | null,
-    }
-  },
-  // Fornisce l'oggetto user a tutti i componenti dell'applicativo
-  provide() {
-    return {
-      user: computed(() => this.user),
     }
   },
   methods: {

@@ -1,6 +1,5 @@
 <script lang="ts">
-import axios from "axios"
-import { computed, defineComponent } from "vue"
+import { defineComponent } from "vue"
 import UserInfo from "./components/user-info.vue"
 import { User } from "./types"
 
@@ -10,21 +9,6 @@ export default defineComponent({
     return {
       user: null as User | null,
     }
-  },
-  // Fornisce l'oggetto user a tutti i componenti dell'applicativo
-  provide() {
-    return {
-      user: computed(() => this.user),
-    }
-  },
-  methods: {
-    async getUser() {
-      const res = await axios.get("/api/auth/profile")
-      this.user = res.data
-    },
-  },
-  mounted() {
-    this.getUser()
   },
 })
 </script>
@@ -41,8 +25,7 @@ export default defineComponent({
     </div>
   </header>
   <main class="grow py-6 border-y border-slate-200 mx-6">
-    <!-- Passa l'utente come prop a tutte le pagine del router -->
-    <RouterView :user="user" />
+    <RouterView />
   </main>
   <footer class="flex p-6">
     <RouterLink to="/" class="text-blue-500 font-bold m-auto">Vuepost</RouterLink>

@@ -1,17 +1,10 @@
 <script lang="ts">
-import axios from "axios"
 import { PropType, defineComponent } from "vue"
 import { User } from "../types"
 
 export default defineComponent({
   props: {
     user: Object as PropType<User>,
-  },
-  methods: {
-    async logout() {
-      await axios.post("/api/auth/logout")
-      window.location.reload()
-    },
   },
 })
 </script>
@@ -33,7 +26,7 @@ export default defineComponent({
       />
     </svg>
   </div>
-  <button class="btn !px-2" @click="logout">
+  <button class="btn !px-2">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5">
       <path
         fill="none"

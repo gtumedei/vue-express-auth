@@ -1,5 +1,4 @@
 <script lang="ts">
-import axios from "axios"
 import { defineComponent } from "vue"
 
 export default defineComponent({
@@ -11,25 +10,7 @@ export default defineComponent({
     }
   },
   methods: {
-    async onSubmit() {
-      if (this.password != this.confirmPassword) {
-        alert("Le due password non coincidono.")
-        return
-      }
-      try {
-        await axios.post("/api/auth/register", {
-          username: this.username,
-          password: this.password,
-        })
-        window.location.href = "/"
-      } catch (e: any) {
-        if (e.response) {
-          alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
-        } else {
-          alert(e.message)
-        }
-      }
-    },
+    async onSubmit() {},
   },
 })
 </script>

@@ -1,5 +1,4 @@
 import bodyParser from "body-parser"
-import cookieParser from "cookie-parser"
 import history from "connect-history-api-fallback"
 import express from "express"
 
@@ -9,7 +8,6 @@ import postsRouter from "./routes/posts-router"
 const app = express()
 
 app.use(bodyParser.json())
-app.use(cookieParser())
 
 app.use(authRouter)
 app.use(postsRouter)

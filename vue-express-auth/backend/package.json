@@ -2,10 +2,10 @@
   "name": "vue-express-auth-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "main.js",
   "scripts": {
-    "start": "node dist/app.js",
-    "dev": "tsx --watch src/app.ts",
+    "start": "node dist/main.js",
+    "dev": "tsx --watch src/main.ts",
     "build": "tsc"
   },
   "author": "",

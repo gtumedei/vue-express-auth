@@ -1,15 +1,12 @@
 <script lang="ts">
 import axios from "axios"
-import { PropType, defineComponent } from "vue"
+import { defineComponent } from "vue"
 import PostForm from "../components/post-form.vue"
 import PostItem from "../components/post-item.vue"
-import { Post, User } from "../types"
+import { Post } from "../types"
 
 export default defineComponent({
   components: { PostForm, PostItem },
-  props: {
-    user: Object as PropType<User>,
-  },
   data() {
     return {
       posts: [] as Post[],
@@ -29,14 +26,14 @@ export default defineComponent({
 
 <template>
   <div class="prose">
-    <PostForm v-if="user" @submit="getPosts" />
+    <PostForm @submit="getPosts" />
     <h1>Gli ultimi post</h1>
     <div v-if="posts.length > 0" class="flex flex-col gap-6">
       <PostItem
         v-for="post in posts"
         :key="post.id"
         :post="post"
-        :canDelete="post.username == user?.username || user?.role == 'admin'"
+        :canDelete="true"
         @delete="getPosts"
       />
     </div>
