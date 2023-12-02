@@ -1,0 +1,23 @@
+CREATE SCHEMA IF NOT EXISTS vuepost DEFAULT CHARACTER SET utf8;
+USE vuepost;
+
+CREATE TABLE IF NOT EXISTS vuepost.users (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(512) NOT NULL,
+  role ENUM("admin", "user") default "user"
+)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS vuepost.posts (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  content VARCHAR(512) NOT NULL,
+  publishedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  authorId INT NOT NULL,
+  CONSTRAINT author_foreign_key
+    FOREIGN KEY (authorId)
+    REFERENCES vuepost.users (id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)
+ENGINE = InnoDB;
