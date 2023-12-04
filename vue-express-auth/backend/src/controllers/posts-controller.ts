@@ -46,7 +46,7 @@ export const deletePost = async (req: Request, res: Response) => {
     return
   }
   // Verifica che l'utente abbia i permessi per eliminare il post
-  const post = posts[0] as any
+  const post = posts[0]
   if (post.authorId != user.id && user.role != "admin") {
     res.status(403).send("Non hai i permessi per eliminare questo post.")
     return
