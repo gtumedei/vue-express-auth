@@ -40,13 +40,13 @@ export const deletePost = async (req: Request, res: Response) => {
   const conn = await getConnection()
 
   // Verifica che il post esista
-  const [posts] = await conn.execute<any[]>("SELECT * FROM posts WHERE id=?", [req.params.id])
-  if (posts.length == 0) {
+  const [posts] = await conn.execute("SELECT * FROM posts WHERE id=?", [req.params.id])
+  if (!Array.isArray(posts) || posts.length == 0) {
     res.status(404).send("Post non trovato.")
     return
   }
   // Verifica che l'utente abbia i permessi per eliminare il post
-  const post = posts[0]
+  const post = posts[0] as any
   if (post.authorId != user.id && user.role != "admin") {
     res.status(403).send("Non hai i permessi per eliminare questo post.")
     return

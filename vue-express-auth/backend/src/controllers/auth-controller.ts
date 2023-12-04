@@ -13,19 +13,44 @@ export const register = async (req: Request, res: Response) => {
 
   // Estrae username e password dal body della richiesta
   const { username, password } = req.body
+  // Equivale a:
+  // const username = req.body.username
+  // const password = req.body.password
 
   // Verifica che l'username sia disponibile
   const connection = await getConnection()
-  const [users] = await connection.execute<any[]>("SELECT username FROM users WHERE username=?", [
+  const [users] = await connection.execute("SELECT username FROM users WHERE username=?", [
     username,
   ])
-  if (users.length > 0) {
+
+  // Equivale a:
+  // const results = await connection.execute("SELECT username FROM users WHERE username=?", [
+  //   username,
+  // ])
+  // const users = results[0]
+
+  // Versione senza await
+  // connection.execute(
+  //   "SELECT username FROM users WHERE username=?",
+  //   [username],
+  //   function (err, res) {
+  //     const users = results[0]
+  //     // In questo caso il resto del codice della funzione register va tutto qui dentro
+  //   }
+  // )
+
+  if (Array.isArray(users) && users.length > 0) {
     res.status(400).send("Username già in uso.")
     return
   }
 
   // Crea l'hash della password per non salvarla in chiaro
   const passwordHash = await bcrypt.hash(password, 10)
+  // Equivale a:
+  // bcrypt.hash(password, 10).then(function (res) {
+  //   const passwordHash = res
+  //   // In questo caso il resto del codice della funzione register va tutto qui dentro
+  // })
 
   // Inserisce l'utente nel database
   await connection.execute("INSERT INTO users (username, password) VALUES (?, ?)", [
@@ -34,11 +59,11 @@ export const register = async (req: Request, res: Response) => {
   ])
 
   // Estrae i dati per il nuovo utente
-  const [results] = await connection.execute<any[]>(
+  const [results] = await connection.execute(
     "SELECT id, username, role FROM users WHERE username=?",
     [username]
   )
-  const newUser = results[0]
+  const newUser = (results as any)[0]
 
   // Crea un JWT contenente i dati dell'utente e lo imposta come cookie
   setAccessToken(req, res, newUser)

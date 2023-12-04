@@ -22,8 +22,8 @@ export const deletePost = async (req: Request, res: Response) => {
   const conn = await getConnection()
 
   // Verifica che il post esista
-  const [posts] = await conn.execute<any[]>("SELECT * FROM posts WHERE id=?", [req.params.id])
-  if (posts.length == 0) {
+  const [posts] = await conn.execute("SELECT * FROM posts WHERE id=?", [req.params.id])
+  if (!Array.isArray(posts) || posts.length == 0) {
     res.status(404).send("Post non trovato.")
     return
   }

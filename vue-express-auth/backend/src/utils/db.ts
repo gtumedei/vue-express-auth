@@ -13,3 +13,14 @@ export const getConnection = async () => {
   }
   return conn
 }
+
+// Versione senza async/await:
+
+// import mysql from "mysql2"
+
+// export const connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "vuepost",
+// })
