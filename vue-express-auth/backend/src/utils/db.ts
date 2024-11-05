@@ -1,24 +1,17 @@
-import mysql, { Connection } from "mysql2/promise"
+import { createConnection } from "mysql2/promise"
 
-let conn: Connection | null = null
-
-export const getConnection = async () => {
-  if (!conn) {
-    conn = await mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "vuepost",
-    })
-  }
-  return conn
-}
+export const connection = await createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "vuepost",
+})
 
 // Versione senza async/await:
 
-// import mysql from "mysql2"
+// import { createConnection } from "mysql2"
 
-// export const connection = mysql.createConnection({
+// export const connection = createConnection({
 //   host: "localhost",
 //   user: "root",
 //   password: "",

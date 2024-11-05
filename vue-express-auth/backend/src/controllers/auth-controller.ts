@@ -1,11 +1,11 @@
 import bcrypt from "bcrypt"
 import { Request, Response } from "express"
-import { decodeAccessToken, deleteAccessToken, setAccessToken } from "../utils/auth"
-import { getConnection } from "../utils/db"
+import { getUser, setUser, unsetUser, User } from "../utils/auth"
+import { connection } from "../utils/db"
 
 export const register = async (req: Request, res: Response) => {
   // Blocca la richiesta se l'utente ha già effettuato il login
-  const user = decodeAccessToken(req, res)
+  const user = getUser(req, res)
   if (user) {
     res.status(403).send("Questa operazione richiede il logout.")
     return
@@ -18,7 +18,6 @@ export const register = async (req: Request, res: Response) => {
   // const password = req.body.password
 
   // Verifica che l'username sia disponibile
-  const connection = await getConnection()
   const [users] = await connection.execute("SELECT username FROM users WHERE username=?", [
     username,
   ])
@@ -35,7 +34,7 @@ export const register = async (req: Request, res: Response) => {
   //   [username],
   //   function (err, res) {
   //     const users = results[0]
-  //     // In questo caso il resto del codice della funzione register va tutto qui dentro
+  //     // In questo caso il resto del codice della funzione register andrebbe tutto qui dentro
   //   }
   // )
 
@@ -63,17 +62,17 @@ export const register = async (req: Request, res: Response) => {
     "SELECT id, username, role FROM users WHERE username=?",
     [username]
   )
-  const newUser = (results as any)[0]
+  const newUser = (results as User[])[0]
 
   // Crea un JWT contenente i dati dell'utente e lo imposta come cookie
-  setAccessToken(req, res, newUser)
+  setUser(req, res, newUser)
 
   res.json({ message: "Registrazione effettuata con successo" })
 }
 
 export const login = async (req: Request, res: Response) => {
   // Blocca la richiesta se l'utente ha già effettuato il login
-  const user = decodeAccessToken(req, res)
+  const user = getUser(req, res)
   if (user) {
     res.status(403).send("Questa operazione richiede il logout.")
     return
@@ -83,7 +82,6 @@ export const login = async (req: Request, res: Response) => {
   const { username, password } = req.body
 
   // Esegue la query al database per ottenere i dati dell'utente in base allo username
-  const connection = await getConnection()
   const [results] = await connection.execute(
     "SELECT id, username, password, role FROM users WHERE username=?",
     [username]
@@ -98,37 +96,39 @@ export const login = async (req: Request, res: Response) => {
   const userData = results[0] as any
 
   // Confronta l'hash della password fornita con quello nel database
-  const passwordOk = await bcrypt.compare(password, userData.password)
+  const correctPassword = await bcrypt.compare(password, userData.password)
 
   // Errore se la password è errata
-  if (!passwordOk) {
+  if (!correctPassword) {
     res.status(400).send("Credenziali errate.")
     return
   }
 
-  // Importante! Rimuove la password dall'oggetto utente
+  // Importante! Rimuove la password dall'oggetto utente in modo da non inserirla nel JWT
   delete userData.password
 
   // Crea un JWT contenente i dati dell'utente e lo imposta come cookie
-  setAccessToken(req, res, userData)
+  setUser(req, res, userData)
 
   res.json({ message: "Login effettuato con successo" })
 }
 
 export const logout = async (req: Request, res: Response) => {
   // Blocca la richiesta se l'utente non ha effettuato il login
-  const user = decodeAccessToken(req, res)
+  const user = getUser(req, res)
   if (!user) {
     res.status(403).send("Questa operazione richiede l'autenticazione.")
     return
   }
+
   // Cancella il cookie contenente l'access token
-  deleteAccessToken(req, res)
+  unsetUser(req, res)
+
   res.json({ message: "Logout effettuato con successo" })
 }
 
 export const getProfile = async (req: Request, res: Response) => {
   // Decodifica il contenuto dell'access token, che contiene il dati dell'utente, e lo invia in risposta
-  const user = decodeAccessToken(req, res)
+  const user = getUser(req, res)
   res.json(user)
 }
