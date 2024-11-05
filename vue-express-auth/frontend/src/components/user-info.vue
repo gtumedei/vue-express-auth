@@ -10,7 +10,7 @@ export default defineComponent({
   methods: {
     async logout() {
       await axios.post("/api/auth/logout")
-      window.location.reload()
+      location.reload()
     },
   },
 })

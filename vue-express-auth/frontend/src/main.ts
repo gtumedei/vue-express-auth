@@ -1,6 +1,6 @@
 import axios from "axios"
 import { createApp } from "vue"
-import { createRouter, createWebHistory, Router } from "vue-router"
+import { createRouter, createWebHistory } from "vue-router"
 import App from "./app.vue"
 import Home from "./pages/home.vue"
 import Login from "./pages/login.vue"
@@ -10,7 +10,7 @@ import { User } from "./types"
 
 import "./style.css"
 
-const router: Router = createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/", component: Home },

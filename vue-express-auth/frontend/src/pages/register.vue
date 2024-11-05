@@ -21,7 +21,7 @@ export default defineComponent({
           username: this.username,
           password: this.password,
         })
-        window.location.href = "/"
+        location.href = "/"
       } catch (e: any) {
         if (e.response) {
           alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
