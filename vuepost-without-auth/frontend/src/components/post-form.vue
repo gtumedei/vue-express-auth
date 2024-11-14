@@ -33,11 +33,11 @@ export default defineComponent({
       ref="textarea"
       v-model="content"
       placeholder="Scrivi quello che vuoi..."
-      class="h-44 w-full px-5 pt-4 pb-20 rounded-lg border-slate-200"
+      class="h-44 w-full px-5 pt-4 pb-20 rounded-lg bg-transparent border-zinc-200 dark:border-zinc-700"
     />
     <button
       type="submit"
-      class="btn !bg-blue-500 text-white disabled:!bg-slate-100 disabled:!text-slate-300 absolute bottom-5 right-5"
+      class="btn !bg-blue-500 text-white disabled:!bg-zinc-100 dark:disabled:!bg-zinc-800 disabled:!text-zinc-300 dark:disabled:!text-zinc-600 absolute bottom-5 right-5"
       :disabled="!canSubmit"
     >
       Posta

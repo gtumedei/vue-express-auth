@@ -25,7 +25,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="prose">
+  <div class="prose dark:prose-invert">
     <PostForm @submit="getPosts" />
     <h1>Gli ultimi post</h1>
     <div v-if="posts.length > 0" class="flex flex-col gap-6">

@@ -19,7 +19,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="px-4 rounded-lg border border-slate-200">
+  <div class="px-4 rounded-lg border border-zinc-200 dark:border-zinc-700">
     <p class="text-sm">
       {{ post?.username }} • {{ new Date(post?.publishedAt ?? "").toLocaleDateString() }}
     </p>

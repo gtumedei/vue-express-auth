@@ -24,7 +24,7 @@ export default defineComponent({
       </template>
     </div>
   </header>
-  <main class="grow py-6 border-y border-slate-200 mx-6">
+  <main class="grow py-6 border-y border-zinc-200 dark:border-zinc-700 mx-6">
     <RouterView />
   </main>
   <footer class="flex p-6">
