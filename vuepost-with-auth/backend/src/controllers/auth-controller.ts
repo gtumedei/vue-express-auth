@@ -7,7 +7,7 @@ export const register = async (req: Request, res: Response) => {
   // Blocca la richiesta se l'utente ha già effettuato il login
   const user = getUser(req, res)
   if (user) {
-    res.status(403).send("Questa operazione richiede il logout.")
+    res.status(401).send("Questa operazione richiede il logout.")
     return
   }
 
@@ -74,7 +74,7 @@ export const login = async (req: Request, res: Response) => {
   // Blocca la richiesta se l'utente ha già effettuato il login
   const user = getUser(req, res)
   if (user) {
-    res.status(403).send("Questa operazione richiede il logout.")
+    res.status(401).send("Questa operazione richiede il logout.")
     return
   }
 
@@ -117,7 +117,7 @@ export const logout = async (req: Request, res: Response) => {
   // Blocca la richiesta se l'utente non ha effettuato il login
   const user = getUser(req, res)
   if (!user) {
-    res.status(403).send("Questa operazione richiede l'autenticazione.")
+    res.status(401).send("Questa operazione richiede l'autenticazione.")
     return
   }
 

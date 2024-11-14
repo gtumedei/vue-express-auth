@@ -16,7 +16,7 @@ export const createPost = async (req: Request, res: Response) => {
   // Verifica che l'utente abbia effettuato il login
   const user = getUser(req, res)
   if (!user) {
-    res.status(403).send("Questa operazione richiede l'autenticazione.")
+    res.status(401).send("Questa operazione richiede l'autenticazione.")
     return
   }
 
@@ -31,7 +31,7 @@ export const deletePost = async (req: Request, res: Response) => {
   // Verifica che l'utente abbia effettuato il login
   const user = getUser(req, res)
   if (!user) {
-    res.status(403).send("Questa operazione richiede l'autenticazione.")
+    res.status(401).send("Questa operazione richiede l'autenticazione.")
     return
   }
 
@@ -41,6 +41,7 @@ export const deletePost = async (req: Request, res: Response) => {
     res.status(404).send("Post non trovato.")
     return
   }
+
   // Verifica che l'utente abbia i permessi per eliminare il post
   const post = posts[0] as any
   if (post.authorId != user.id && user.role != "admin") {

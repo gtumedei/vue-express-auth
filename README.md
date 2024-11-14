@@ -52,7 +52,7 @@ If you want, you can implement frontend features as you are working on the backe
    Requires **step 6** on the backend.
 5. Provide the user to all routes as a prop (`src/app.vue`).\
    Requires **step 7** on the backend.
-6. Homepage: receive the `user` prop, conditionally show `PostForm` and set `canSubmit` in `PostItem` (`src/home.vue`).\
+6. Homepage: receive the `user` prop, conditionally show `PostForm` and set `canDelete` in `PostItem` (`src/home.vue`).\
    Requires **step 8** on the backend.
 7. Secure frontend routes (`src/main.ts`).\
    Requires **step 8** on the backend.
