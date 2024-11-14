@@ -14,7 +14,7 @@ export const getAllPosts = async (req: Request, res: Response) => {
 export const createPost = async (req: Request, res: Response) => {
   await connection.execute("INSERT INTO posts (content, authorId) VALUES (?, ?)", [
     req.body.content,
-    0,
+    null,
   ])
   res.json({ success: true })
 }

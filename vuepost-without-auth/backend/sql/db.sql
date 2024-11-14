@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS vuepost.posts (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   content VARCHAR(512) NOT NULL,
   publishedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  authorId INT NOT NULL,
+  authorId INT,
   CONSTRAINT author_foreign_key
     FOREIGN KEY (authorId)
     REFERENCES vuepost.users (id)
