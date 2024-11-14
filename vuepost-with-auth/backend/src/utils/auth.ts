@@ -11,7 +11,7 @@ export interface User {
 // Utilizzare una variabile d'ambiente per il secret in progetti reali!
 // E anche un secret più complesso.
 const JWT_SECRET = "foo"
-const COOKIE_NAME = "access-token"
+const COOKIE_NAME = "vuepost-access-token"
 
 /**
  * Codifica l'utente in un access token e lo imposta come cookie.

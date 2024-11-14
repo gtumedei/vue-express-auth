@@ -1,0 +1,26 @@
+{
+  "name": "vue-express-auth-backend",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/main.js",
+    "dev": "tsx --watch src/main.ts",
+    "build": "esbuild src/main.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/main.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "connect-history-api-fallback": "^2.0.0",
+    "express": "^4.21.1",
+    "mysql2": "^3.11.3"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/connect-history-api-fallback": "^1.5.4",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.0",
+    "esbuild": "^0.24.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
