@@ -37,7 +37,7 @@ export default defineComponent({
     />
     <button
       type="submit"
-      class="btn !bg-blue-500 text-white disabled:!bg-zinc-100 dark:disabled:!bg-zinc-800 disabled:!text-zinc-300 dark:disabled:!text-zinc-600 absolute bottom-5 right-5"
+      class="btn bg-blue-500! text-white disabled:!bg-zinc-100 dark:disabled:!bg-zinc-800 disabled:!text-zinc-300 dark:disabled:!text-zinc-600 absolute bottom-5 right-5"
       :disabled="!canSubmit"
     >
       Posta

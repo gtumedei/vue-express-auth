@@ -56,7 +56,7 @@ export default defineComponent({
         class="rounded-lg bg-transparent border-zinc-200 dark:border-zinc-700"
         placeholder="Conferma password"
       />
-      <button type="submit" class="btn !bg-blue-500 text-white w-1/2 mx-auto mt-3">
+      <button type="submit" class="btn bg-blue-500! text-white w-1/2 mx-auto mt-3">
         Registrati
       </button>
     </form>

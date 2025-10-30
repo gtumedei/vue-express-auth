@@ -30,7 +30,7 @@ export default defineComponent({
       <UserInfo v-if="user" :user="user" />
       <template v-else>
         <RouterLink to="/login" class="btn">Login</RouterLink>
-        <RouterLink to="/register" class="btn !bg-blue-500 text-white">Registrati</RouterLink>
+        <RouterLink to="/register" class="btn bg-blue-500! text-white">Registrati</RouterLink>
       </template>
     </div>
   </header>
