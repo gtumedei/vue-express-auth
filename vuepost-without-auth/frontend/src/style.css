@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
 
 .btn {
   @apply text-sm font-semibold px-4 py-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg;
