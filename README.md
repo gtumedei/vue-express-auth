@@ -44,7 +44,7 @@ If you want, you can implement frontend features as you are working on the backe
 
 1. Registration form `onSubmit` handler (`src/pages/register.vue`)\
    Requires **step 3** on the backend.
-2. Login form `onSubmit` handler (`src/pages/register.vue`).\
+2. Login form `onSubmit` handler (`src/pages/login.vue`).\
    Requires **step 4** on the backend.
 3. `getUser` method in `src/app.vue`.\
    Requires **step 5** on the backend.
