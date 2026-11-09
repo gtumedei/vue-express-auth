@@ -2,6 +2,7 @@ import { createConnection } from "mysql2/promise"
 
 export const connection = await createConnection({
   host: "localhost",
+  // Utilizzare variabili d'ambiente per le credenziali del database in progetti reali!
   user: "root",
   password: "",
   database: "vuepost",
