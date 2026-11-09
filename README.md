@@ -8,25 +8,25 @@ Folders:
 
 These instructions are valid for both `vuepost-without-auth` and `vuepost-with-auth`.
 
-Requirements: Node.js and a MySQL instance.
+Requirements: Node.js, PNPM, and a MySQL instance.
 
 1. Run the `backend/sql/db.sql` to create the `vuepost` database and its tables.
-2. Open a terminal in `backend`, install dependencies with `npm i` and start the dev server with `npm run dev`.
-3. Open another terminal in `frontend`, install dependencies with `npm i` and start the dev server with `npm run dev`.
+2. Open a terminal in `backend`, install dependencies with `pnpm i` and start the dev server with `pnpm dev`.
+3. Open another terminal in `frontend`, install dependencies with `pnpm i` and start the dev server with `pnpm dev`.
 4. Visit http://localhost:5173.
 
 ## Steps
 
 This is a TO-DO list to implement the auth features presented in the seminar. The starting point is `vuepost-without-auth` and the end result should be the same as `vuepost-with-auth`.
 
-These instructions are also useful if you want to add authentication to an existing application.
+These instructions are also useful if you want to add authentication to an existing application, although in that case it's strongly recommended you rely on an existing auth library such as [Better Auth](https://better-auth.com/).
 
 ### Backend
 
 1. Install dependencies: `bcrypt`, `jsonwebtoken`, `cookie-parser`. For `cookie-parser`, also add the related middleware (`src/main.ts`).
     ```
-    npm i bcrypt jsonwebtoken cookie-parser
-    npm i -D @types/bcrypt @types/jsonwebtoken @types/cookie-parser
+    pnpm i bcrypt jsonwebtoken cookie-parser
+    pnpm i -D @types/bcrypt @types/jsonwebtoken @types/cookie-parser
     ```
 2. Auth server utilities `setUser`, `getUser`, `unsetUser` in `src/utils/auth.ts`.
 3. Register API route with password encryption (`src/controllers/auth-controller.ts`).
