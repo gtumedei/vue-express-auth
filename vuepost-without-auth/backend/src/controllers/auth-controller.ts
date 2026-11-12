@@ -6,6 +6,15 @@ export const register = async (req: Request, res: Response) => {
   // Estrae username e password dal body della richiesta
   const { username, password } = req.body
 
+  // Verifica che l'username sia disponibile
+  const [users] = await connection.execute("SELECT username FROM users WHERE username=?", [
+    username,
+  ])
+  if (Array.isArray(users) && users.length > 0) {
+    res.status(400).send("Username già in uso.")
+    return
+  }
+
   // Inserisce l'utente nel database
   await connection.execute("INSERT INTO users (username, password) VALUES (?, ?)", [
     username,
@@ -15,7 +24,7 @@ export const register = async (req: Request, res: Response) => {
   // Estrae i dati del nuovo utente
   const [results] = await connection.execute(
     "SELECT id, username, role FROM users WHERE username=?",
-    [username]
+    [username],
   )
   const newUser = (results as User[])[0]
 
@@ -29,7 +38,7 @@ export const login = async (req: Request, res: Response) => {
   // Esegue la query al database per ottenere i dati dell'utente in base allo username
   const [results] = await connection.execute(
     "SELECT id, username, password, role FROM users WHERE username=?",
-    [username]
+    [username],
   )
 
   res.json({ message: "Login effettuato con successo" })
